@@ -2,6 +2,7 @@
 #include <stdio.h> 
 #include <math.h> 
 #include <sys/time.h>
+#include <omp.h> 
 
 double get_walltime() {
 				struct timeval tp; gettimeofday(&tp, NULL);
