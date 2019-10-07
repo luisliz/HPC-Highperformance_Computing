@@ -17,18 +17,15 @@ void force_repulsion(int np, const double *pos, double L, double krepulsion, dou
 				for (i=0; i<3*np; i++)
 								forces[i] = 0.;
 				// loop over all pairs
-				for (i=0; i<np; i++)
-				{
+				for (i=0; i<np; i++) {
 								posi[0] = pos[3*i ];
 								posi[1] = pos[3*i+1]; posi[2] = pos[3*i+2];
-								for (j=i+1; j<np; j++)
-								{
+								for (j=i+1; j<np; j++) {
 												// compute minimum image difference
 												rvec[0] = remainder(posi[0] - pos[3*j ], L); rvec[1] = remainder(posi[1] - pos[3*j+1], L);
 												rvec[2] = remainder(posi[2] - pos[3*j+2], L);
 												s2 = rvec [0]* rvec [0] + rvec [1]* rvec [1] + rvec [2]* rvec [2];
-												if (s2 < 4)
-												{
+												if (s2 < 4)	{
 																s = sqrt(s2);
 																rvec[0] /= s; rvec[1] /= s;
 																rvec[2] /= s;
@@ -37,7 +34,8 @@ void force_repulsion(int np, const double *pos, double L, double krepulsion, dou
 																forces[3*i+1] += f*rvec[1]; forces[3*i+2] += f*rvec[2];
 																forces[3*j ] += -f*rvec[0]; forces[3*j+1] += -f*rvec[1];
 																forces[3*j+2] += -f*rvec[2]; }
-								} }
+								} 
+				}
 }
 
 
@@ -61,6 +59,8 @@ int main(int argc, char *argv[]) {
 				// measure execution time of this function
 
 				time0 = get_walltime ();
+				
+				#pragma omp parallel 
 				force_repulsion(np, pos, L, krepulsion, forces); 
 				time1 = get_walltime ();
 
@@ -68,4 +68,5 @@ int main(int argc, char *argv[]) {
 				printf("elapsed time: %f\n", time1-time0);
 				free(forces);
 				free(pos);
-				return 0; }
+				return 0; 
+}
