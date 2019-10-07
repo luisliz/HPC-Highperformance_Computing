@@ -14,9 +14,11 @@ void force_repulsion(int np, const double *pos, double L, double krepulsion, dou
 				double posi [4]; double rvec [4];
 				double s2, s, f;
 				// initialize forces to zero
+				#pragma omp parallel for 
 				for (i=0; i<3*np; i++)
 								forces[i] = 0.;
 				// loop over all pairs
+				#pragma omp parallel for 
 				for (i=0; i<np; i++)
 				{
 								posi[0] = pos[3*i ];
