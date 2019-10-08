@@ -23,7 +23,8 @@ void force_repulsion(int np, const double *pos, double L, double krepulsion, dou
         // loop over all pairs
 
         #pragma omp for schedule(static) //Determine Scheduling Here 
-        for (i = 0; i < np; i++) {
+				printf("yeet %d", omp_get_thread_num()); 
+				for (i = 0; i < np; i++) {
             posi[0] = pos[3 * i];
             posi[1] = pos[3 * i + 1];
             posi[2] = pos[3 * i + 2];
