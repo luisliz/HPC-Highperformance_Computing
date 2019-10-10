@@ -1,0 +1,54 @@
+static 
+number of particles: 100
+elapsed time: 0.000556
+
+number of particles: 1000
+elapsed time: 0.007431
+
+number of particles: 10000
+elapsed time: 0.469923
+
+number of particles: 100000
+elapsed time: 45.727563
+
+Guided 
+number of particles: 100
+elapsed time: 0.000555
+
+number of particles: 1000
+elapsed time: 0.007404
+
+number of particles: 10000
+elapsed time: 0.461578
+
+number of particles: 100000
+elapsed time: 45.698484
+
+dynamic 
+number of particles: 100
+elapsed time: 0.000524
+
+number of particles: 1000
+elapsed time: 0.004445
+
+number of particles: 10000
+elapsed time: 0.257541
+
+number of particles: 100000
+elapsed time: 26.518595
+
+
+baseline
+number of particles: 100
+elapsed time: 0.000795
+
+number of particles: 1000
+elapsed time: 0.018002
+
+number of particles: 10000
+elapsed time: 1.509135
+
+number of particles: 100000
+elapsed time: 149.359214
+
+
