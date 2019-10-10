@@ -35,7 +35,8 @@ void force_repulsion(int np, const double *pos, double L, double krepulsion, dou
 																forces[3*i ] += f*rvec[0];
 																forces[3*i+1] += f*rvec[1]; forces[3*i+2] += f*rvec[2];
 																forces[3*j ] += -f*rvec[0]; forces[3*j+1] += -f*rvec[1];
-																forces[3*j+2] += -f*rvec[2]; }
+																forces[3*j+2] += -f*rvec[2]; 
+												}
 								} }
 }
 
