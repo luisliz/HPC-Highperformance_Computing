@@ -226,7 +226,7 @@ int main (int argc, char *argv[]) {
 				}
 				t = clock()-t; 
 				time_taken = ((double)t)/CLOCKS_PER_SEC; 
-				printf("\n\tParallel took: %f seconds", time_taken);
+				printf("\n\tParallel took: %f seconds\n", time_taken);
 
 				
 				
