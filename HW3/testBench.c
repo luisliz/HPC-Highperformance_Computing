@@ -35,34 +35,32 @@ void readFromArray(int graph[MAX][MAX], int n) {
 }
 
 //SHORTEST PATH ALGORITHMS 
-void dijsk(int graph[MAX][MAX], int n, int src) { 
-				int dist[MAX]; 
-				int sptSet[MAX]; 
+void dijsk(int graph[MAX][MAX], int n) { 
+				int dist[MAX][MAX]; 
+				int sptSet[MAX][MAX]; 
 
 				for (int i = 0; i < n; i++) 
-								dist[i] = INF, sptSet[i] = 0; 
+								dist[i][i] = INF, sptSet[i][i] = 0; 
 
-				dist[src] = 0; 
+				for (int src = 0; src < n; src++)  {
+								dist[src][src] = 0; 
 
-				for (int count = 0; count < n - 1; count++) { 
-								int min = INF, min_index; 
-								for (int v = 0; v < n; v++) 
-												if (sptSet[v] == 0 && dist[v] <= min) 
-																min = dist[v], min_index = v; 
+								for (int count = 0; count < n - 1; count++) { 
+												int min = INF, min_index; 
+												for (int v = 0; v < n; v++) 
+																if (sptSet[count][v] == 0 && dist[count][v] <= min) 
+																				min = dist[count][v], min_index = v; 
 
-								int u = min_index; 
+												int u = min_index; 
 
-								sptSet[u] = 1; 
+												sptSet[count][u] = 1; 
 
-								for (int v = 0; v < n; v++) 
-												if (!sptSet[v] && graph[u][v] && dist[u] != INF && dist[u] + graph[u][v] < dist[v]) 
-																dist[v] = dist[u] + graph[u][v]; 
-				} 
-
-				printf("\n");
-				for(int i = 0; i<n; i++) {
-								printf("%d\t", dist[i]); 
+												for (int v = 0; v < n; v++) 
+																if (!sptSet[count][v] && graph[u][v] && dist[count][u] != INF && dist[count][u] + graph[u][v] < dist[count][v]) 
+																				dist[count][v] = dist[count][u] + graph[u][v]; 
+								} 
 				}
+				printDistances(dist, n); 
 }
 
 
@@ -104,8 +102,7 @@ int main() {
 				printf("\nRunning Floyd's Algo"); 
 				floydAlgo(graph, n); 
 				printf("\nRunning Dijkstra's Algo"); 
-				for(int i=0; i<n; i++) 
-								dijsk(graph, n, i);
+				dijsk(graph, n);
 
 				return 0; 
 }
