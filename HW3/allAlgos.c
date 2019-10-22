@@ -63,12 +63,6 @@ void dijsk(int graph[MAX][MAX], int n) {
 				printDistances(dist, n); 
 }
 
-
-
-
-
-
-
 void floydAlgo(int graph[MAX][MAX], int n) {
 				int distances[MAX][MAX], sum, i, j, k; 
 
@@ -94,9 +88,8 @@ void floydAlgo(int graph[MAX][MAX], int n) {
 }
 
 
-
-int main() {
-				int n = 20; 
+int main (int argc, char *argv[]) {
+				int n = atoi(argv[1]); 
 				int graph[MAX][MAX] = {0}; 
 				readFromArray(graph, n); 
 				printf("\nRunning Floyd's Algo"); 
