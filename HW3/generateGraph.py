@@ -23,8 +23,5 @@ def generateFile(n):
     print("File written")
     f.close()
 
-    nx.draw(G)
-    plt.show()
-    
 if __name__ == "__main__": 
     generateFile(int(sys.argv[1]))
