@@ -1,10 +1,11 @@
 #include <stdio.h> 
+#include <stdlib.h> 
 
 #define INF 99999
-#define V 4 
+#define V 20 
 
 void printDistances(int dist[V][V]) {
-				printf("Shortest distances between vertices\n"); 
+				printf("\nShortest distances between vertices\n"); 
 
 				for(int i = 0; i<V; i++) {
 								for(int j=0; j< V; j++) {
@@ -17,8 +18,24 @@ void printDistances(int dist[V][V]) {
 				}
 }
 
+void readFromArray(int graph[V][V]) {
+				FILE *myFile; 
+				myFile = fopen("graph.txt", "r"); 
+
+				int i, j; 
+
+				for(i =  0; i < V; i++) {
+								for(j = 0; j<V; j++) {
+												fscanf(myFile, "%d, ", &graph[i][j]); 
+								}
+				}
+				
+				fclose(myFile); 
+
+}
+
 void floydAlgo(int graph[V][V]) {
-				int distances[V][V], i, j, k, sum; 
+				int distances[V][V], sum, i, j, k; 
 
 				for(i = 0; i<V; i++)
 								for(j=0; j< V; j++)
@@ -28,20 +45,22 @@ void floydAlgo(int graph[V][V]) {
 								for(i = 0; i<V; i++) {
 												for(j=0; j< V; j++) {
 																sum = distances[i][k]+distances[k][j]; 
-																if(sum < distances[i][j])
+																if(sum < distances[i][j]) {
 																				distances[i][j] = sum; 
+																}
+																		
 												}
 								}
 				}
 				printDistances(distances); 
 }
 
-int main() {
-				int graph[V][V] = {{0,   5,  INF, 10}, 
-								{INF, 0,   3, INF}, 
-								{2, INF, INF,   1}, 
-								{INF, 5, INF, 0}}; 
 
+
+int main() {
+				int graph[V][V] = {0}; 
+				readFromArray(graph); 
 				floydAlgo(graph); 
+
 				return 0; 
 }
