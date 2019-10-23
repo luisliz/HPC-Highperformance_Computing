@@ -1,6 +1,7 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <time.h> 
+#include <omp.h> 
 
 #define INF 99999
 #define MAX 500 
@@ -172,7 +173,8 @@ void parFloydAlgo(int graph[MAX][MAX], int n) {
 				for(i = 0; i<n; i++)
 								for(j=0; j< n; j++)
 												distances[i][j] = graph[i][j]; 
-
+				
+				#pragma parallel omp for
 				for(k=0; k<n; k++) {
 								for(i = 0; i<n; i++) {
 												for(j=0; j < n; j++) {
@@ -181,6 +183,7 @@ void parFloydAlgo(int graph[MAX][MAX], int n) {
 																else { 
 																				sum = distances[i][k]+distances[k][j]; 
 																				if(sum < distances[i][j]) {
+																								#pragma omp critical
 																								distances[i][j] = sum; 
 																				}
 																}
@@ -228,7 +231,6 @@ int main (int argc, char *argv[]) {
 				time_taken = ((double)t)/CLOCKS_PER_SEC; 
 				printf("\n\tParallel took: %f seconds\n", time_taken);
 
-				
 				
 
 				return 0; 
