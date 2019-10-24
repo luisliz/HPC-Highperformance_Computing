@@ -128,7 +128,7 @@ void parFloydAlgo(int **graph, int n) {
 				for(i = 0; i<n; i++)
 								for(j=0; j< n; j++)
 												distances[i][j] = graph[i][j]; 
-				
+#pragma parallel for 
 				for(k=0; k<n; k++) {
 								for(i = 0; i<n; i++) {
 												for(j=0; j < n; j++) {
