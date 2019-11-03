@@ -3,12 +3,22 @@
 const int N = 16; 
 const int blocksize = 16; 
 
+#define gpuErrchk(ans) { gpuAssert((ans), __FILE__, __LINE__); }
+inline void gpuAssert(cudaError_t code, char *file, int line, bool abort=true)
+{
+   if (code != cudaSuccess)
+   {
+      fprintf(stderr,"GPUassert: %s %s %d\n", cudaGetErrorString(code), file, line);
+      if (abort) exit(code);
+   }
+}
+
 __global__ void hello(char *a, int *b) {
 				a[threadIdx.x] += b[threadIdx.x]; 
 }
 
 int main() {
-				char a[N] "Hello \n\n\n\n\n\n"; 
+				char a[N] = "Hello \n\n\n\n\n\n"; 
 				int b[N] = {15, 10, 6, 0, -11, 1, 0, 0, 0, 0, 0,0,0,0,0,0}; 
 
 				char *ad; 
@@ -19,19 +29,20 @@ int main() {
 
 				printf("%s", a); 
 
-				cudaMalloc((void**) &ad, csize); 
-				cudaMalloc((void**) &bd, isize); 
-				cudaMemcpy(ad, a, csize, cudaMemcpyHostToDevice); 
-				cudaMemcpy(bd, b, isize, cudaMemcpyHostToDevice); 
+				gpuErrchk(cudaMalloc((void**) &ad, csize));
+				gpuErrchk(cudaMalloc((void**) &bd, isize));
+				gpuErrchk(cudaMemcpy(ad, a, csize, cudaMemcpyHostToDevice));
+				gpuErrchk(cudaMemcpy(bd, b, isize, cudaMemcpyHostToDevice));
 
 				dim3 dimBlock(blocksize, 1); 
 				dim3 dimGrid(1, 1); 
 
 				hello<<<dimGrid, dimBlock>>>(ad, bd); 
-
-				cudaMemcpy(a, ad, csize, cudaMemcpyHostToDevice); 
-				cudaFree(ad); 
-				cudaFree(bd);
+				gpuErrchk( cudaPeekAtLastError() );
+        gpuErrchk( cudaDeviceSynchronize() );
+				gpuErrchk(cudaMemcpy(a, ad, csize, cudaMemcpyHostToDevice)); 
+				gpuErrchk(cudaFree(ad)); 
+				gpuErrchk(cudaFree(bd));
 
 				printf("%s\n", a); 
 				return EXIT_SUCCESS; 
