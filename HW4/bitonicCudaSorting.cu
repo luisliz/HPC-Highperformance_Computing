@@ -1,45 +1,71 @@
+#include <stdlib.h> 
 #include <stdio.h> 
+#include <time.h> 
 
-int[] arr;
-#define ASCENDING = 1
-#define DESCENDING = 0
+#define THREADS 512 
+#define BLOCKS 32768
+#define NUM_VALS THREADS*BLOCKS
 
-void exchange (int i, int j) {
-				int t = a[i]; 
-				a[i] = a[j]; 
-				a[j] = t; 
-}
-
-void compare(int i, int j, boolean dir) {
-				if (dir == (a[i]>a[j]))
-								exchange(i, j); 
-}
-void bitonicMerge(int lo, int n, boolean dir) {
-				int (n>1) {
-								int m = n/2; 
-								for (int i = lo; i < lo+m; i++)
-												compare(i, i+m, dir); 
-								bitonicMerge(lo, m, dir); 
-								bitonicMerge(lo+m, m, dir); 
+void rand_nums(int *values, int length) {
+				int i; 
+				for(i = 0; i< length; ++i) {
+								values[i] = (int)rand()/(int)INT_MAX;
 				}
 }
 
-void bitonicSort(int lo, int n, boolean dir) {
-	if(n>1) {
-					int m = n/2; 
-					bitonicSort(lo, m, ASCENDING); 
-					bitonicSort(lo+m, m, DESCENDING); 
-					bitonicMerge(lo, n, dir); 
-	}
-}
 
-void sort(int[] a) {
-				arr = a; 
-				bitonicSort(0, a.length, ASCENDING);
+
+__global__ void bitonicMinorSort(int *innerValues, int j, int k) {
+				unsigned int i, ixj; 
+				i = threadIdx.x + blockDim.x * blockIdx.x; 
+
+				ixj = i^j; 
+
+				if ((ixj)>i) {
+								if((i&k)==0) {
+												if(innerValues[i]> innerValues[ixj]) {
+																int temp = innerValues[i]; 
+																innerValues[i] = innerValues[ixj]; 
+																innerValues[ixj] = temp; 
+												}
+								}
+
+
+								if((i&k)!=0) {
+												if(innerValues[i] < innerValues[ixj]) {
+																int temp = innerValues[i];
+																innerValues[i]	 = innerValues[ixj]; 
+																innerValues[ixj] = temp; 
+												}
+								}
+				}
+}
+void bitonicSort(int *values) {
+				int *innerValues	; 
+
+				size_t size = NUM_VALS * sizeof(int); 
+
+				cudaMalloc((void **) &innerValues, size); 
+				cudaMemcpy(innerValues, values, size, cudaMemcpuHostToDevice); 
+
+				dim3 blocks(BLOCKS, 1); 
+				dim3 threads(THREADS, 1); 
+
+				int j, k; 
+
+				for(k = 2; k <= NUM_VALS; k <<= 1) {
+								for(j = k >>1; j>0; j=j>>1) {
+												bitonicMinorSort(<<<blocks, threads>>>(innerValues, j, k)); 
+								}
+				}
+
+				cudaMemcpy(values, innerValues, size, cudaMemcpyDeviceToHost); 
+				cudaFree(innerValues); 
 }
 
 int main() {
-				int n = 6; 
-	int[n] arr = {5, 6, 7, 2, 1, 0}; 
-	bitonicSort(0, n, ASCENDING); 
+				int *values = (int *) malloc(NUM_VALS * sizeof(int)); 
+				rand_nums(values, NUM_VALS); 
+
+				bitonicSort(values); 
 }
