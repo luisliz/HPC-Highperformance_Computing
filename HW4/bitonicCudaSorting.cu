@@ -46,7 +46,7 @@ void bitonicSort(int *values) {
 				size_t size = NUM_VALS * sizeof(int); 
 
 				cudaMalloc((void **) &innerValues, size); 
-				cudaMemcpy(innerValues, values, size, cudaMemcpuHostToDevice); 
+				cudaMemcpy(innerValues, values, size, cudaMemcpyHostToDevice); 
 
 				dim3 blocks(BLOCKS, 1); 
 				dim3 threads(THREADS, 1); 
@@ -55,7 +55,7 @@ void bitonicSort(int *values) {
 
 				for(k = 2; k <= NUM_VALS; k <<= 1) {
 								for(j = k >>1; j>0; j=j>>1) {
-												bitonicMinorSort(<<<blocks, threads>>>(innerValues, j, k)); 
+												bitonicMinorSort<<<blocks, threads>>>(innerValues, j, k); 
 								}
 				}
 
@@ -66,6 +66,12 @@ void bitonicSort(int *values) {
 int main() {
 				int *values = (int *) malloc(NUM_VALS * sizeof(int)); 
 				rand_nums(values, NUM_VALS); 
-
+				for(int i = 0; i < NUM_VALS; i++) {
+								printf("%d ", values[i]); 
+				}
 				bitonicSort(values); 
+
+				for(int i = 0; i < NUM_VALS; i++) {
+								printf("%d ", values[i]); 
+				}
 }
