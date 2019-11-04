@@ -9,7 +9,7 @@
 void rand_nums(int *values, int length) {
 				int i; 
 				for(i = 0; i< length; ++i) {
-								values[i] = (int)rand()/(int)INT_MAX;
+								values[i] = rand() % 10000 + 1;;
 				}
 }
 
@@ -64,14 +64,19 @@ void bitonicSort(int *values) {
 }
 
 int main() {
-				int *values = (int *) malloc(NUM_VALS * sizeof(int)); 
-				rand_nums(values, NUM_VALS); 
-				for(int i = 0; i < NUM_VALS; i++) {
+				int *values = (int *) malloc(NUM_VALS * sizeof(int));
+				int n = 10;
+				rand_nums(values, n);
+                printf("Before:\n");
+				for(int i = 0; i < n; i++) {
 								printf("%d ", values[i]); 
 				}
-				bitonicSort(values); 
-
-				for(int i = 0; i < NUM_VALS; i++) {
+				bitonicSort(values);
+                cudaDeviceSynchronize();
+                printf("\nAfter:\n ");
+                for(int i = 0; i < n; i++) {
 								printf("%d ", values[i]); 
 				}
+                printf("\n ");
 }
+
