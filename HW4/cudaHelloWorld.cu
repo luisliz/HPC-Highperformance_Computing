@@ -18,7 +18,7 @@ __global__ void hello(char *a, int *b) {
 }
 
 int main() {
-				char a[N] = "Hello \n\n\n\n\n\n"; 
+				char a[N] = "Hello \0\0\0\0\0\0"; 
 				int b[N] = {15, 10, 6, 0, -11, 1, 0, 0, 0, 0, 0,0,0,0,0,0}; 
 
 				char *ad; 
