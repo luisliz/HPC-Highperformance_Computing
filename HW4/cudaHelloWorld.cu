@@ -14,7 +14,7 @@ inline void gpuAssert(cudaError_t code, char *file, int line, bool abort=true)
 }
 
 __global__ void hello(char *a, int *b) {
-				a[threadIdx.x] += b[threadIdx.x]; 
+    a[threadIdx.x] += b[threadIdx.x];
 }
 
 int main() {
@@ -27,7 +27,7 @@ int main() {
 				const int csize= N*sizeof(char); 
 				const int isize = N*sizeof(int); 
 
-				printf("%s", a); 
+				printf("%s", a);
 
 				gpuErrchk(cudaMalloc((void**) &ad, csize));
 				gpuErrchk(cudaMalloc((void**) &bd, isize));
@@ -37,14 +37,14 @@ int main() {
 				dim3 dimBlock(blocksize, 1); 
 				dim3 dimGrid(1, 1); 
 
-				hello<<<dimGrid, dimBlock>>>(ad, bd); 
-				gpuErrchk( cudaPeekAtLastError() );
-        gpuErrchk( cudaDeviceSynchronize() );
-				gpuErrchk(cudaMemcpy(a, ad, csize, cudaMemcpyHostToDevice)); 
+				hello<<<dimGrid, dimBlock>>>(ad, bd);
+
+				gpuErrchk(cudaMemcpy(a, ad, csize, cudaMemcpyDeviceToHost));
 				gpuErrchk(cudaFree(ad)); 
 				gpuErrchk(cudaFree(bd));
 
-				printf("%s\n", a); 
+				printf("%s\n", a);
 				return EXIT_SUCCESS; 
 }
+
 
