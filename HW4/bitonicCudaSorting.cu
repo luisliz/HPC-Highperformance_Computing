@@ -1,8 +1,8 @@
-#include <iostream.h> 
+#include <stdio.h> 
 
-int[] a;
-#define ASCENDING = true
-#define DESCENDING = false 
+int[] arr;
+#define ASCENDING = 1
+#define DESCENDING = 0
 
 void exchange (int i, int j) {
 				int t = a[i]; 
@@ -34,10 +34,12 @@ void bitonicSort(int lo, int n, boolean dir) {
 }
 
 void sort(int[] a) {
-				this.a = a; 
+				arr = a; 
 				bitonicSort(0, a.length, ASCENDING);
 }
 
 int main() {
-
+				int n = 6; 
+	int[n] arr = {5, 6, 7, 2, 1, 0}; 
+	bitonicSort(0, n, ASCENDING); 
 }
