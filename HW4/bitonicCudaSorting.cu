@@ -76,7 +76,8 @@ void bitonicSort(int *values, int n) {
 int main() {
     int *values = (int *) malloc(NUM_VALS * sizeof(int));
     int *origValues = (int *) malloc(NUM_VALS * sizeof(int));
-    int n = 50;
+    int k = 50;
+		int n = 2^k; 
     rand_nums(values, n);
 
     for (int i = 0; i < n; i++) {
