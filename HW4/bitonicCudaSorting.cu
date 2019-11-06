@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <time.h>
 
-#define THREADS 1024
+#define THREADS 16384
 #define BLOCKS 65536
 #define NUM_VALS THREADS*BLOCKS
 
-void rand_nums(int *values, int length) {
+void rand_nums(int *values, unsigned long length) {
 				int i;
 				for (i = 0; i < length; ++i) {
 								values[i] = rand() % INT_MAX + 1;;
@@ -40,7 +40,7 @@ __global__ void bitonicMinorSort(int *innerValues, int j, int k) {
 				}
 }
 
-void bitonicSort(int *values, int n) {
+void bitonicSort(int *values, unsigned long n) {
 				int *innerValues;
 
 				size_t size = n * sizeof(int);
@@ -55,11 +55,8 @@ void bitonicSort(int *values, int n) {
 								blockSize = ceil(n/THREADS);
 				}
 
-				printf("%d BLOCKS", blockSize);
 				dim3 blocks(blockSize, 1);
 				dim3 threads(THREADS, 1);
-
-
 
 				int j, k;
 
@@ -74,39 +71,38 @@ void bitonicSort(int *values, int n) {
 }
 
 int main(int argc, char *argv[]) {
-				int *values = (int *) malloc(NUM_VALS * sizeof(int));
-				int *origValues = (int *) malloc(NUM_VALS * sizeof(int));
 				int k = 10;  
-				if(argc==2) {
+
+				if(argc==2)
 								k = atoi(argv[1]); 
-								printf("%d\n", k); 
 
-				} else {
-								printf("Please input a correct value for k. Default k = 10 will be used.\n"); 
-				}
+				int *values = (int *) malloc(NUM_VALS * sizeof(int));    
+				int *origValues = (int *) malloc(NUM_VALS * sizeof(int));    
 
-				int n = pow(2,k); 
-				printf("%d\n", n); 
+				unsigned long n;
+				double time_spent;
+				clock_t begin, end; 
+
+				n = pow(2,k); 
+				printf("\nk = %d, n = %ld\n", k, n); 
+
 				rand_nums(values, n);
 
-				for (int i = 0; i < n; i++) {
+				for (unsigned long i = 0; i < n; i++)
 								origValues[i] = values[i];
-				}
-				double time_spent = 0.0; 
-				clock_t begin = clock(); 
 
+
+				time_spent = 0.0; 
+				begin = clock(); 
 				bitonicSort(values, n);
-				cudaDeviceSynchronize();
-				clock_t end = clock();
-
+				end = clock();
 				time_spent += (double)(end-begin) / CLOCKS_PER_SEC; 
-				printf("Elapsed time is %f seconds", time_spent); 
-				//printf("\nAfter:\n ");
-				//for (int i = 0; i < n; i++) {
-				//    printf("%d\t|%d\n ", values[i], origValues[i]);
-				//}
-				//printf("\n");
+				printf("\tElapsed time: %f seconds\n", time_spent); 
+
+				free(values); 
+				free(origValues); 
 }
+
 
 
 
