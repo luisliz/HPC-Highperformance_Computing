@@ -22,7 +22,6 @@ void compAndSwap(int *a, int i, int j, int dir)
 								temp = a[j];
 								a[j] = a[i];
 								a[i] = temp;
-								//swap(a[i], a[j]);
 				}
 }
 
