@@ -1,0 +1,28 @@
+Process 0 Sent ping: 1 to process 1
+Process 0 Received pong: 2 from 1
+Process 0 Sent ping: 3 to process 1
+Process 0 Received pong: 4 from 1
+Process 0 Sent ping: 5 to process 1
+Process 0 Received pong: 6 from 1
+Process 0 Sent ping: 7 to process 1
+Process 0 Received pong: 8 from 1
+Process 0 Sent ping: 9 to process 1
+Process 0 Received pong: 10 from 1
+
+Process 0 took 0.000094s to complete.
+Avg. time per pingpong 0.000009s.
+
+Process 1 Received pong: 1 from 0
+Process 1 Sent ping: 2 to process 0
+Process 1 Received pong: 3 from 0
+Process 1 Sent ping: 4 to process 0
+Process 1 Received pong: 5 from 0
+Process 1 Sent ping: 6 to process 0
+Process 1 Received pong: 7 from 0
+Process 1 Sent ping: 8 to process 0
+Process 1 Received pong: 9 from 0
+Process 1 Sent ping: 10 to process 0
+
+Process 1 took 0.000084s to complete.
+Avg. time per pingpong 0.000008s.
+
