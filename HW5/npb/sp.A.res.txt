@@ -5,7 +5,8 @@
  No input file inputsp.data. Using compiled defaults
  Size:   64x  64x  64  (class A)
  Iterations:  400    dt:   0.0015000
- Total number of processes:     1
+ WARNING: Number of active processes:    16
+ Total number of processes:    24
 
  Time step    1
  Time step   20
@@ -31,17 +32,17 @@
  Verification being performed for class A
  accuracy setting for epsilon =  0.1000000000000E-07
  Comparison of RMS-norms of residual
-           1 0.2479982239930E+01 0.2479982239930E+01 0.7019524876361E-13
-           2 0.1127633796437E+01 0.1127633796437E+01 0.7325125700659E-13
-           3 0.1502897788877E+01 0.1502897788877E+01 0.3826577768709E-13
-           4 0.1421781621170E+01 0.1421781621170E+01 0.3919954724857E-13
+           1 0.2479982239930E+01 0.2479982239930E+01 0.7413477803096E-13
+           2 0.1127633796437E+01 0.1127633796437E+01 0.7915861644260E-13
+           3 0.1502897788877E+01 0.1502897788877E+01 0.4343682872588E-13
+           4 0.1421781621170E+01 0.1421781621170E+01 0.4122980268375E-13
            5 0.2129211303514E+01 0.2129211303514E+01 0.1122105610209E-12
  Comparison of RMS-norms of solution error
-           1 0.1090014029782E-03 0.1090014029782E-03 0.4058245804988E-12
-           2 0.3734395176929E-04 0.3734395176928E-04 0.1017965075245E-12
-           3 0.5009278540654E-04 0.5009278540654E-04 0.5816792408142E-14
-           4 0.4767109393954E-04 0.4767109393953E-04 0.1947402573493E-12
-           5 0.1362161339921E-03 0.1362161339921E-03 0.6785410251750E-13
+           1 0.1090014029782E-03 0.1090014029782E-03 0.4006025730291E-12
+           2 0.3734395176929E-04 0.3734395176928E-04 0.1007077748237E-12
+           3 0.5009278540654E-04 0.5009278540654E-04 0.6763712102491E-14
+           4 0.4767109393954E-04 0.4767109393953E-04 0.1963038652550E-12
+           5 0.1362161339921E-03 0.1362161339921E-03 0.6805308815538E-13
  Verification Successful
 
 
@@ -49,11 +50,11 @@
  Class           =                        A
  Size            =             64x  64x  64
  Iterations      =                      400
- Time in seconds =                    43.19
- Total processes =                        1
- Active procs    =                        1
- Mop/s total     =                  1968.18
- Mop/s/process   =                  1968.18
+ Time in seconds =                     3.26
+ Total processes =                       24
+ Active procs    =                       16
+ Mop/s total     =                 26043.84
+ Mop/s/process   =                  1085.16
  Operation type  =           floating point
  Verification    =               SUCCESSFUL
  Version         =                      3.4
