@@ -18,3 +18,51 @@
  Time step  140
  Time step  160
  Time step  180
+ Time step  200
+ Verification being performed for class C
+ accuracy setting for epsilon =  0.1000000000000E-07
+ Comparison of RMS-norms of residual
+           1 0.6239811655176E+04 0.6239811655176E+04 0.5247243197904E-14
+           2 0.5079323919042E+03 0.5079323919042E+03 0.1141496155043E-13
+           3 0.1542353009301E+04 0.1542353009301E+04 0.5690411870162E-13
+           4 0.1330238792929E+04 0.1330238792929E+04 0.5982443665614E-14
+           5 0.1160408742844E+05 0.1160408742844E+05 0.1097279377060E-14
+ Comparison of RMS-norms of solution error
+           1 0.1646200836909E+03 0.1646200836909E+03 0.1191287178775E-13
+           2 0.1149710790382E+02 0.1149710790382E+02 0.2549327021655E-13
+           3 0.4120744620746E+02 0.4120744620746E+02 0.8104241260813E-14
+           4 0.3708765105969E+02 0.3708765105969E+02 0.1915847230703E-13
+           5 0.3621105305184E+03 0.3621105305184E+03 0.3045374914452E-13
+ Verification Successful
+
+
+ BT Benchmark Completed.
+ Class           =                        C
+ Size            =            162x 162x 162
+ Iterations      =                      200
+ Time in seconds =                  1078.30
+ Total processes =                        2
+ Active procs    =                        1
+ Mop/s total     =                  2658.14
+ Mop/s/process   =                  1329.07
+ Operation type  =           floating point
+ Verification    =               SUCCESSFUL
+ Version         =                      3.4
+ Compile date    =              12 Nov 2019
+
+ Compile options:
+    MPIFC        = mpif90
+    FLINK        = $(MPIFC)
+    FMPI_LIB     = (none)
+    FMPI_INC     = (none)
+    FFLAGS       = -O3
+    FLINKFLAGS   = $(FFLAGS)
+    RAND         = (none)
+
+
+ Please send feedbacks and/or the results of this run to:
+
+ NPB Development Team 
+ Internet: npb@nas.nasa.gov
+
+
