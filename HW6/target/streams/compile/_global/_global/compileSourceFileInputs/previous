@@ -1,0 +1,1 @@
+["sbt.Task[scala.collection.immutable.Map[java.lang.String, scala.collection.Seq[scala.Tuple2[java.nio.file.Path, sbt.nio.FileStamp]]]]",{"2.11.12":{"hashes":[["/home/cc/Highperformance_Computing/HW6/WordCount.scala","867d9ee520a7eae3819db9d6fcb0e07d15c9c85b"]],"lastModifiedTimes":[]}}]

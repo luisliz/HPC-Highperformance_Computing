@@ -1,0 +1,13 @@
+compile
+exit()
+exit
+install
+reload
+install
+compile
+run
+run sherlock.txt
+run sherlock.txt res.txt
+compile 
+run
+run shortShort.txt res

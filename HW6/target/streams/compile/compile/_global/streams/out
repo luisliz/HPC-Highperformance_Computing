@@ -1,0 +1,13 @@
+[0m[[0m[31merror[0m] [0m[0m/home/cc/Highperformance_Computing/HW6/WordCount.scala:1:12: object apache is not a member of package org[0m
+[0m[[0m[31merror[0m] [0m[0mimport org.apache.spark._[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/cc/Highperformance_Computing/HW6/WordCount.scala:2:12: object apache is not a member of package org[0m
+[0m[[0m[31merror[0m] [0m[0mimport org.apache.spark.SparkContext._[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/cc/Highperformance_Computing/HW6/WordCount.scala:8:22: not found: type SparkConf[0m
+[0m[[0m[31merror[0m] [0m[0m      val conf = new SparkConf().setAppName("wordCount")[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/cc/Highperformance_Computing/HW6/WordCount.scala:10:20: not found: type SparkContext[0m
+[0m[[0m[31merror[0m] [0m[0m      val sc = new SparkContext(conf)[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0mfour errors found[0m
