@@ -23,7 +23,7 @@ for element, count in res:
 
 f = open("res.txt", "w+")
 for i in sorted(compact): 
-    strr = "%s: %d" % (i,  compact[i])
+    strr = "%s: %d\n" % (i,  compact[i])
     f.write(strr.encode('utf-8'))
 f.close()
 
