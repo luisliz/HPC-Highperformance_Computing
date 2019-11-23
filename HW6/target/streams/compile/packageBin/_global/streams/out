@@ -1,1 +1,15 @@
-[0m[[0m[0mdebug[0m] [0m[0mJar uptodate: /home/cc/Highperformance_Computing/HW6/target/scala-2.11/hw6_2.11-0.1.0-SNAPSHOT.jar[0m
+[0m[[0m[0mdebug[0m] [0m[0mPackaging /home/cc/Highperformance_Computing/HW6/target/scala-2.11/hw6_2.11-0.1.0-SNAPSHOT.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/cc/Highperformance_Computing/HW6/target/scala-2.11/classes[0m
+[0m[[0m[0mdebug[0m] [0m[0m	WordCount$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/cc/Highperformance_Computing/HW6/target/scala-2.11/classes/WordCount$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	WordCount.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/cc/Highperformance_Computing/HW6/target/scala-2.11/classes/WordCount.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	WordCount$$anonfun$3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/cc/Highperformance_Computing/HW6/target/scala-2.11/classes/WordCount$$anonfun$3.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	WordCount$$anonfun$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/cc/Highperformance_Computing/HW6/target/scala-2.11/classes/WordCount$$anonfun$2.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	WordCount$$anonfun$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/cc/Highperformance_Computing/HW6/target/scala-2.11/classes/WordCount$$anonfun$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m

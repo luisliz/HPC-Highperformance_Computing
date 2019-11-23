@@ -2,33 +2,29 @@ from pyspark import SparkContext, SparkConf
 import timeit
 import threading
 
-def run_spark(): 
-    conf = SparkConf()
-    conf.setAppName("Word count") #[*] is number of cores
-    sc = SparkContext(conf=conf)
+conf = SparkConf()
+conf.setAppName("Word count")
+sc = SparkContext(conf=conf)
 
-    rdd = sc.textFile("sherlock.txt")
+rdd = sc.textFile("sherlock.txt")
 
-    print "Runners: ", sc._conf.get('spark.executor.instances')
+words = rdd.flatMap(lambda line: line.split('\n')).collect() 
 
-    docs = rdd.flatMap(lambda doc: doc.split(' '))
+rss = sc.parallelize(words).map(lambda word: (word, 1)).collect()
 
-    sc.parallelize(list(docs))
+compact = {}
+for element, count in rss:
+    if element in compact: 
+        compact[element] += count
+    else: 
+        compact[element] = count
 
-    res = docs.map(lambda word: (word, 1)).collect()
+f = open("res.txt", "w+")
+for i in sorted(compact): 
+    strr = "%s: %d\n" % (i,  compact[i])
+    f.write(strr.encode('utf-8'))
+f.close()
 
-    compact = {}
-    for element, count in res:
-        if element in compact: 
-            compact[element] += count
-        else: 
-            compact[element] = count
-
-    f = open("res.txt", "w+")
-    for i in sorted(compact): 
-        strr = "%s: %d\n" % (i,  compact[i])
-        f.write(strr.encode('utf-8'))
-    f.close()
-
-elapsed_time = timeit.timeit(run_spark, number=1)
-print "Elapsed time", elapsed_time
+sc.stop()
+#elapsed_time = timeit.timeit(run_spark, number=1)
+#print "Elapso timo", elapsed_time
