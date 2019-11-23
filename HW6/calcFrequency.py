@@ -1,6 +1,21 @@
 from pyspark import SparkContext, SparkConf 
 import timeit
-import threading
+
+def printResults(inpDict):
+    for w in inpDict.keys(): 
+        print w, ": ", inpDict[w] 
+
+def countWords(l): 
+    result = {}
+    l = l.split(' ') 
+    for j in l:
+        j = j.lower()
+        if j in result: 
+            result[j] += 1
+        else: 
+            result[j] = 1 
+    return result 
+
 
 conf = SparkConf()
 conf.setAppName("Word count")
@@ -8,21 +23,17 @@ sc = SparkContext(conf=conf)
 
 rdd = sc.textFile("sherlock.txt")
 
-words = rdd.flatMap(lambda line: line.split('\n')).collect() 
+result = {} 
+lines = rdd.flatMap(lambda line: line.split('\n')).collect()
+res = sc.parallelize(lines).map(lambda line: countWords(line)).collect()
 
-rss = sc.parallelize(words).map(lambda word: (word, 1)).collect()
+for group in res:
+    result.update(group) 
 
-compact = {}
-for element, count in rss:
-    if element in compact: 
-        compact[element] += count
-    else: 
-        compact[element] = count
-
-f = open("res.txt", "w+")
-for i in sorted(compact): 
-    strr = "%s: %d\n" % (i,  compact[i])
-    f.write(strr.encode('utf-8'))
+f = open("res.txt", mode="w+")
+for i in sorted(result.keys()): 
+    strr = u' '.join((i+":", str(result[i]))).encode('utf-8').strip() + "\n"
+    f.write(strr)
 f.close()
 
 sc.stop()
