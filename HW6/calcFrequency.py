@@ -1,9 +1,10 @@
 from pyspark import SparkContext, SparkConf 
 import timeit
+import re
 
 def printResults(inpDict):
     for w in inpDict.keys(): 
-        print w, ": ", inpDict[w] 
+        print(w, ": ", inpDict[w])
 
 def countWords(l): 
     result = {}
@@ -16,26 +17,21 @@ def countWords(l):
             result[j] = 1 
     return result 
 
+def run_spark(): 
+    conf = SparkConf()
+    conf.setAppName("Word count")
+    sc = SparkContext(conf=conf)
+    
+    rdd = sc.textFile("sherlock.txt")
+    
+    result = {} 
+    lines = rdd.flatMap(lambda line: line.split('\n')).collect()
+    res = sc.parallelize(lines).map(lambda line: countWords(line)).collect()
+    
+    for group in res:
+        result.update(group) 
+    
+    sc.stop()
 
-conf = SparkConf()
-conf.setAppName("Word count")
-sc = SparkContext(conf=conf)
-
-rdd = sc.textFile("sherlock.txt")
-
-result = {} 
-lines = rdd.flatMap(lambda line: line.split('\n')).collect()
-res = sc.parallelize(lines).map(lambda line: countWords(line)).collect()
-
-for group in res:
-    result.update(group) 
-
-f = open("res.txt", mode="w+")
-for i in sorted(result.keys()): 
-    strr = u' '.join((i+":", str(result[i]))).encode('utf-8').strip() + "\n"
-    f.write(strr)
-f.close()
-
-sc.stop()
-#elapsed_time = timeit.timeit(run_spark, number=1)
-#print "Elapso timo", elapsed_time
+elapsed_time = timeit.timeit(run_spark, number=1)
+print("Elapso timo ", elapsed_time)
